@@ -10,6 +10,8 @@ function get_words(str)
       table.insert(words, word)
     end
     table.remove(words, 1) -- remove the first word
+    print("words:", words)
+    print("Message:", str)
     return table.concat(words, " ")
   end
 
@@ -36,11 +38,7 @@ function get_words(str)
 
   local RunService = game:GetService("RunService")
   local MaxFPS = 30
-  while true do
-      local t0 = tick()
-      RunService.RenderSteppec:Wait()
-      repeat until (t0 + 1/MaxFPS) < tick()
-  end
+setfpscap(MaxFPS)
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(Data)
     local Player = game:GetService("Players")[Data.FromSpeaker]
     local Message = Data.Message
